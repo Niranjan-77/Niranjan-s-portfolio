@@ -1,0 +1,533 @@
+/* Extracted tokens and animations from src/index.css to work without Tailwind build */
+:root {
+	--background: 210 40% 98%;
+	--foreground: 222 47% 11%;
+	--border: 220 13% 91%;
+	--card: 0 0% 100%;
+	--card-foreground: 222 47% 11%;
+	--card-border: 220 13% 91%;
+	--primary: 221 83% 53%;
+	--primary-foreground: 0 0% 100%;
+	--primary-hover: 221 83% 60%;
+	--secondary: 258 93% 67%;
+	--secondary-foreground: 0 0% 10%;
+	--muted: 210 40% 96%;
+	--muted-foreground: 215 16% 35%;
+	--accent: 258 93% 67%;
+	--accent-foreground: 0 0% 10%;
+	--success: 142 76% 36%;
+	--input: 220 13% 91%;
+	--ring: 258 93% 67%;
+	--radius: 12px;
+	--radius-sm: 8px;
+	--radius-lg: 16px;
+	--card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+	--card-shadow-hover: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Make --percentage animatable so conic fill visibly transitions */
+@property --percentage {
+	syntax: '<number>';
+	inherits: true;
+	initial-value: 0;
+}
+
+html, body { height: 100%; }
+body {
+	background: hsl(var(--background));
+	color: hsl(var(--foreground));
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+	line-height: 1.6;
+	scroll-behavior: smooth;
+}
+
+/* Custom helpers that Tailwind would provide at runtime via CDN config */
+.bg-background { background-color: hsl(var(--background)); }
+.text-foreground { color: hsl(var(--foreground)); }
+.bg-card { background-color: hsl(var(--card)); }
+.border-card-border { border-color: hsl(var(--card-border)); }
+.bg-muted { background-color: hsl(var(--muted)); }
+.text-muted-foreground { color: hsl(var(--muted-foreground)); }
+.text-primary { color: hsl(var(--primary)); }
+.bg-primary { background-color: hsl(var(--primary)); }
+.bg-primary\/10 { background-color: hsl(var(--primary) / 0.1); }
+.bg-primary\/20 { background-color: hsl(var(--primary) / 0.2); }
+.text-primary-foreground { color: hsl(var(--primary-foreground)); }
+.border { border-width: 1px; }
+.rounded-lg { border-radius: var(--radius); }
+.rounded-xl { border-radius: calc(var(--radius) + 4px); }
+.shadow-card { box-shadow: var(--card-shadow); }
+.hover\:shadow-card-hover:hover { box-shadow: var(--card-shadow-hover); }
+
+/* Sections */
+.section-gradient {
+	background:
+		radial-gradient(800px 500px at 85% 0%, hsl(var(--primary) / 0.14), transparent 60%),
+		hsl(var(--background));
+}
+.section-tint-primary {
+	background:
+		linear-gradient(0deg, hsl(var(--primary) / 0.06), hsl(var(--primary) / 0.06)),
+		hsl(var(--background));
+}
+.section-tint-secondary {
+	background:
+		linear-gradient(0deg, hsl(var(--secondary) / 0.06), hsl(var(--secondary) / 0.06)),
+		hsl(var(--background));
+}
+.section-tint-accent {
+	background:
+		linear-gradient(0deg, hsl(var(--accent) / 0.08), hsl(var(--accent) / 0.08)),
+		hsl(var(--background));
+}
+.section-divider { border-top: 1px solid hsl(var(--border)); }
+
+/* Hero animated background */
+.hero-animated { position: relative; overflow: hidden; }
+.hero-animated::before {
+	content: "";
+	position: absolute;
+	inset: -25%;
+	background:
+		radial-gradient(640px 420px at 80% 12%, hsl(var(--primary) / 0.28), transparent 60%),
+		radial-gradient(560px 380px at 18% 88%, hsl(var(--secondary) / 0.22), transparent 60%);
+	filter: blur(60px);
+	animation: hero-drift 16s ease-in-out infinite alternate;
+	pointer-events: none;
+	z-index: 0;
+}
+.hero-animated::after {
+	content: "";
+	position: absolute;
+	inset: -30%;
+	background:
+		radial-gradient(520px 360px at 15% 15%, hsl(var(--secondary) / 0.20), transparent 60%),
+		radial-gradient(600px 420px at 85% 85%, hsl(var(--primary) / 0.18), transparent 60%),
+		linear-gradient(hsl(var(--foreground) / 0.06) 1px, transparent 1px),
+		linear-gradient(90deg, hsl(var(--foreground) / 0.06) 1px, transparent 1px),
+		radial-gradient(120% 80% at 50% 0%, transparent 55%, hsl(var(--foreground) / 0.07));
+	background-size: auto auto, auto auto, 40px 40px, 40px 40px, auto auto;
+	background-position: center, center, 0 0, 0 0, center;
+	filter: blur(70px);
+	animation: hero-drift-2 22s ease-in-out infinite alternate;
+	pointer-events: none;
+	z-index: 0;
+}
+
+@keyframes hero-drift {
+	0%   { transform: translate3d(0, 0, 0) scale(1); }
+	50%  { transform: translate3d(-3%, -2%, 0) scale(1.06); }
+	100% { transform: translate3d(2%, 2%, 0) scale(1.01); }
+}
+@keyframes hero-drift-2 {
+	0%   { transform: translate3d(0, 0, 0) scale(1); }
+	50%  { transform: translate3d(3%, -1%, 0) scale(1.03); }
+	100% { transform: translate3d(-2%, 2%, 0) scale(1.02); }
+}
+
+/* Enhanced circular progress with animation */
+
+.circular-progress {
+	--size: 140px;
+	--thickness: 10px;
+	
+	--percentage: 0;
+	position: relative;
+	width: var(--size);
+	height: var(--size);
+	border-radius: 50%;
+	background: hsl(var(--muted-foreground) / 0.06);
+	transition: all 0.3s ease, --percentage 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.circular-progress::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	/* Layer 1: fill arc (animated). Layer 2: static track ring */
+	background:
+		conic-gradient(hsl(var(--primary)) 0deg, hsl(var(--primary)) 0deg, transparent 0deg),
+		conic-gradient(hsl(var(--muted-foreground) / 0.15) 0deg, hsl(var(--muted-foreground) / 0.15) 360deg);
+	/* Proper donut mask so ring thickness equals var(--thickness) */
+	mask: radial-gradient(farthest-side,
+		transparent calc(50% - var(--thickness)),
+		#000 calc(50% - var(--thickness)),
+		#000 100%);
+	-webkit-mask: radial-gradient(farthest-side,
+		transparent calc(50% - var(--thickness)),
+		#000 calc(50% - var(--thickness)),
+		#000 100%);
+	will-change: auto;
+}
+
+.circular-progress.animate::before {
+	background:
+		conic-gradient(hsl(var(--primary)) 0deg, hsl(var(--primary)) calc(var(--percentage) * 3.6deg), transparent calc(var(--percentage) * 3.6deg)),
+		conic-gradient(hsl(var(--muted-foreground) / 0.15) 0deg, hsl(var(--muted-foreground) / 0.15) 360deg);
+}
+
+
+.circular-progress::after {
+	content: attr(data-percentage) '%';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 16px;
+	font-weight: 600;
+	color: hsl(var(--foreground));
+	z-index: 1;
+}
+
+/* Skill card animations - updated for rectangular layout */
+.skill-card {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: all 0.6s ease;
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+}
+
+.skill-card.animate {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.skill-card:hover {
+	transform: translateY(-8px);
+	box-shadow: var(--card-shadow-hover);
+	border-color: hsl(var(--primary) / 0.3);
+}
+
+/* Enhanced skill card content layout */
+.skill-card .skill-icon {
+	transition: all 0.3s ease;
+	flex-shrink: 0;
+}
+
+.skill-card:hover .skill-icon {
+	transform: scale(1.1);
+	background: hsl(var(--primary) / 0.2) !important;
+}
+
+.skill-card h4 {
+	transition: color 0.2s ease;
+}
+
+.skill-card:hover h4 {
+	color: hsl(var(--primary));
+}
+
+.skill-card ul li {
+	transition: color 0.2s ease;
+}
+
+.skill-card:hover ul li {
+	color: hsl(var(--foreground));
+}
+
+/* Circular progress positioning for rectangular cards */
+.skill-card .circular-progress {
+	--size: 140px;
+	--thickness: 0.5px;
+	margin: 0;
+}
+
+/* Buttons */
+.btn-outline {
+	border: 1px solid hsl(var(--card-border));
+	color: hsl(var(--primary));
+	padding: 0.5rem 0.75rem;
+	border-radius: var(--radius);
+	transition: 0.2s ease;
+}
+.btn-outline:hover { background: hsl(var(--primary) / 0.1); }
+.icon-btn { padding: 0.25rem; border-radius: 8px; transition: 0.2s ease; }
+.icon-btn:hover { background: hsl(var(--primary) / 0.1); }
+
+/* Certificate filter buttons - improved look */
+.filter-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.5rem 0.9rem;
+	border-radius: 9999px;
+	border: 1px solid hsl(var(--card-border));
+	background: hsl(var(--card));
+	color: hsl(var(--foreground));
+	box-shadow: var(--card-shadow);
+	transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.filter-btn:hover {
+	background: hsl(var(--primary) / 0.08);
+	border-color: hsl(var(--primary) / 0.4);
+}
+.filter-btn.is-active {
+	background: hsl(var(--primary));
+	color: hsl(var(--primary-foreground));
+	border-color: hsl(var(--primary));
+	box-shadow: var(--card-shadow-hover);
+}
+.filter-btn.is-active i[data-lucide] { color: hsl(var(--primary-foreground)); }
+
+/* Certificate cards - hover/touch interaction */
+#cert-grid > div {
+	transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+	transform: translateY(0) scale(1);
+}
+#cert-grid > div:hover,
+#cert-grid > div.touch-active {
+	transform: translateY(-6px) scale(1.01);
+	box-shadow: var(--card-shadow-hover);
+	border-color: hsl(var(--primary) / 0.35);
+}
+#cert-grid > div:active {
+	transform: translateY(-2px) scale(0.995);
+}
+
+/* Animations used by data-animate attributes */
+@keyframes slide-in-up { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes slide-in-left { from { opacity: 0; transform: translateX(-30px);} to { opacity: 1; transform: translateX(0);} }
+@keyframes fade-in { from { opacity: 0;} to { opacity: 1;} }
+.animate-slide-in-up { animation: slide-in-up 0.6s ease-out forwards; }
+.animate-slide-in-left { animation: slide-in-left 0.6s ease-out forwards; }
+.animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+
+/* Utilities */
+.loader { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Active nav underline style */
+.nav-active { color: hsl(var(--primary)); border-bottom: 2px solid hsl(var(--primary)); }
+
+/* Toast */
+.toast { background: hsl(var(--card)); color: hsl(var(--foreground)); border: 1px solid hsl(var(--card-border)); padding: 0.75rem 1rem; border-radius: 10px; box-shadow: var(--card-shadow); }
+
+/* Small tweak for lucide icons sizing when used inline */
+i[data-lucide] { width: 20px; height: 20px; display: inline-block; vertical-align: middle; }
+
+/* Project cards - enhanced styling */
+#projects-grid > div {
+	transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+	transform: translateY(0) scale(1);
+	border: 1px solid hsl(var(--card-border));
+}
+
+#projects-grid > div:hover {
+	transform: translateY(-8px) scale(1.02);
+	box-shadow: var(--card-shadow-hover);
+	border-color: hsl(var(--primary) / 0.4);
+}
+
+#projects-grid > div:active {
+	transform: translateY(-4px) scale(1.01);
+}
+
+/* Enhanced project button styling */
+.project-view-btn {
+	background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+	color: hsl(var(--primary-foreground));
+	border: none;
+	padding: 0.75rem 1.5rem;
+	border-radius: var(--radius);
+	font-weight: 600;
+	font-size: 0.875rem;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+}
+
+.project-view-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px hsl(var(--primary) / 0.4);
+}
+
+.project-view-btn:active {
+	transform: translateY(0);
+}
+
+.project-view-btn::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: left 0.5s ease;
+}
+
+.project-view-btn:hover::before {
+	left: 100%;
+}
+
+/* Project card content enhancements */
+.project-card-header {
+	border-bottom: 1px solid hsl(var(--card-border));
+	padding: 1.5rem;
+}
+
+.project-card-body {
+	padding: 1.5rem;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.project-title {
+	font-size: 1.125rem;
+	font-weight: 700;
+	color: hsl(var(--foreground));
+	margin-bottom: 0.75rem;
+	transition: color 0.2s ease;
+}
+
+.project-description {
+	color: hsl(var(--muted-foreground));
+	line-height: 1.6;
+	margin-bottom: 1rem;
+	flex: 1;
+}
+
+.project-meta {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+	font-size: 0.875rem;
+	color: hsl(var(--muted-foreground));
+}
+
+.project-topics {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.project-topic {
+	background: hsl(var(--primary) / 0.1);
+	color: hsl(var(--primary));
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	font-size: 0.75rem;
+	font-weight: 500;
+	border: 1px solid hsl(var(--primary) / 0.2);
+	transition: all 0.2s ease;
+}
+
+.project-topic:hover {
+	background: hsl(var(--primary) / 0.2);
+	border-color: hsl(var(--primary) / 0.4);
+	transform: translateY(-1px);
+}
+
+/* About info list */
+.about-info { }
+.about-term { width: 120px; min-width: 120px; color: hsl(var(--muted-foreground)); font-weight: 600; margin-right: 0.75rem; }
+.about-desc { color: hsl(var(--foreground)); font-weight: 500; }
+
+/* Education Section Styles */
+.education-item {
+	position: relative;
+	overflow: hidden;
+	border-left: 4px solid transparent;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.education-item:hover {
+	border-left-color: hsl(var(--primary));
+	transform: translateX(8px);
+}
+
+.education-item::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, 
+		hsl(var(--primary) / 0.02) 0%, 
+		hsl(var(--primary) / 0.05) 50%, 
+		hsl(var(--primary) / 0.02) 100%);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.education-item:hover::before {
+	opacity: 1;
+}
+
+.education-item .bg-green-500 {
+	animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.education-item .bg-blue-500,
+.education-item .bg-purple-500 {
+	transition: all 0.3s ease;
+}
+
+.education-item:hover .bg-blue-500 {
+	background-color: hsl(221 83% 60%);
+	transform: scale(1.2);
+}
+
+.education-item:hover .bg-purple-500 {
+	background-color: hsl(221 83% 60%);
+	transform: scale(1.2);
+}
+
+/* Education item icon animations */
+.education-item i {
+	transition: all 0.3s ease;
+}
+
+.education-item:hover i {
+	transform: rotate(5deg) scale(1.1);
+}
+
+/* Education item entrance animations */
+.education-item {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: slideInUp 0.6s ease forwards;
+}
+
+.education-item:nth-child(1) { animation-delay: 0.1s; }
+.education-item:nth-child(2) { animation-delay: 0.2s; }
+.education-item:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes slideInUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Enhanced hover effects */
+.education-item:hover {
+	box-shadow: 0 8px 25px hsl(var(--primary) / 0.15);
+}
+
+.education-item:active {
+	transform: translateX(8px) scale(0.98);
+}
+
+/* Responsive adjustments for education section */
+@media (max-width: 768px) {
+	.education-item {
+		padding: 1rem;
+	}
+	
+	.education-item:hover {
+		transform: translateX(4px);
+	}
+	
+	.education-item:active {
+		transform: translateX(4px) scale(0.98);
+	}
+}
+

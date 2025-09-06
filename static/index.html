@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Niranjan - Web Developer & AWS Cloud Learner</title>
+    <meta name="description" content="Professional portfolio of Niranjan - Web Developer, AWS Cloud Learner, and Gen AI Software Developer. Explore my projects, certificates, and get in touch for collaboration opportunities." />
+    <meta name="author" content="Niranjan" />
+    <meta name="keywords" content="web developer, AWS cloud, generative AI, software developer, portfolio, JavaScript, React, Python, Java" />
+
+    <meta property="og:title" content="Niranjan - Web Developer & AWS Cloud Learner" />
+    <meta property="og:description" content="Professional portfolio showcasing web development, cloud computing, and AI projects. Available for freelance and full-time opportunities." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://niranjan-portfolio.com" />
+    <meta property="og:image" content="/og-image.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Niranjan - Web Developer & AWS Cloud Learner" />
+    <meta name="twitter:description" content="Professional portfolio showcasing web development, cloud computing, and AI projects." />
+    <meta name="twitter:image" content="/og-image.jpg" />
+
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN for layout/utilities only -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: 'hsl(var(--background))',
+              foreground: 'hsl(var(--foreground))',
+              primary: {
+                DEFAULT: 'hsl(var(--primary))',
+                foreground: 'hsl(var(--primary-foreground))',
+                hover: 'hsl(var(--primary-hover))'
+              },
+              secondary: {
+                DEFAULT: 'hsl(var(--secondary))',
+                foreground: 'hsl(var(--secondary-foreground))'
+              },
+              accent: {
+                DEFAULT: 'hsl(var(--accent))',
+                foreground: 'hsl(var(--accent-foreground))'
+              },
+              muted: {
+                DEFAULT: 'hsl(var(--muted))',
+                foreground: 'hsl(var(--muted-foreground))'
+              },
+              card: {
+                DEFAULT: 'hsl(var(--card))',
+                foreground: 'hsl(var(--card-foreground))',
+                border: 'hsl(var(--card-border))'
+              },
+              input: 'hsl(var(--input))',
+              ring: 'hsl(var(--ring))',
+              success: 'hsl(var(--success))'
+            },
+            boxShadow: {
+              card: 'var(--card-shadow)',
+              'card-hover': 'var(--card-shadow-hover)'
+            },
+            borderRadius: {
+              DEFAULT: 'var(--radius)',
+              lg: 'var(--radius-lg)',
+              sm: 'var(--radius-sm)'
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  </head>
+  <body class="bg-background text-foreground">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-card-border" id="site-nav">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="text-2xl font-bold text-primary">Niranjan</div>
+          <div class="hidden md:flex items-center space-x-8" id="desktop-nav">
+            <button data-target="home" class="px-3 py-2 text-sm font-medium transition-colors hover:text-primary nav-link">Home</button>
+            <button data-target="about" class="px-3 py-2 text-sm font-medium transition-colors hover:text-primary nav-link">About</button>
+            <button data-target="skills" class="px-3 py-2 text-sm font-medium transition-colors hover:text-primary nav-link">Skills</button>
+            <button data-target="certificates" class="px-3 py-2 text-sm font-medium transition-colors hover:text-primary nav-link">Certificates</button>
+            <button data-target="projects" class="px-3 py-2 text-sm font-medium transition-colors hover:text-primary nav-link">Projects</button>
+            <button data-target="contact" class="px-3 py-2 text-sm font-medium transition-colors hover:text-primary nav-link">Contact</button>
+            <a href="./Niranjan_Resume.pdf" download="Niranjan-Resume.pdf" class="resume-download ml-2 inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-3 py-1.5 text-sm shadow-card transition hover:brightness-110 active:brightness-90 focus:outline-none">Download Resume</a>
+          </div>
+          <button id="mobile-menu-toggle" class="md:hidden p-2" aria-label="Toggle menu">
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+        <div id="mobile-nav" class="hidden md:hidden mt-4 py-4 border-t border-card-border">
+          <div class="flex flex-col space-y-3">
+            <button data-target="home" class="px-3 py-2 text-left text-sm font-medium transition-colors hover:text-primary nav-link">Home</button>
+            <button data-target="about" class="px-3 py-2 text-left text-sm font-medium transition-colors hover:text-primary nav-link">About</button>
+            <button data-target="skills" class="px-3 py-2 text-left text-sm font-medium transition-colors hover:text-primary nav-link">Skills</button>
+            <button data-target="certificates" class="px-3 py-2 text-left text-sm font-medium transition-colors hover:text-primary nav-link">Certificates</button>
+            <button data-target="projects" class="px-3 py-2 text-left text-sm font-medium transition-colors hover:text-primary nav-link">Projects</button>
+            <button data-target="contact" class="px-3 py-2 text-left text-sm font-medium transition-colors hover:text-primary nav-link">Contact</button>
+            <a href="./Niranjan_Resume.pdf" download="Niranjan-Resume.pdf" class="resume-download px-3 py-2 text-left text-sm font-medium rounded-md bg-primary text-primary-foreground">Download Resume</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Toast container -->
+    <div id="toast-root" class="fixed top-20 right-6 space-y-2 z-[60]"></div>
+
+    <main>
+      <!-- Hero -->
+      <section id="home" class="min-h-screen flex items-center justify-center pt-24 px-6 section-gradient hero-animated">
+        <div class="container mx-auto">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 relative z-10 opacity-0" data-animate="slide-in-left">
+              <div class="space-y-2">
+                <h1 class="text-4xl md:text-5xl font-bold">Hi, It's <span class="text-primary">Niranjan</span></h1>
+                <div class="h-12 flex items-center">
+                  <h2 class="text-2xl md:text-3xl font-semibold">I'm a <span id="role-text" class="text-primary">Web Developer</span><span class="inline-block w-1 h-8 ml-2 bg-primary animate-pulse"></span></h2>
+                </div>
+              </div>
+              <div class="space-y-4 max-w-lg">
+                <p class="text-lg text-muted-foreground leading-relaxed">Passionate about creating innovative web solutions and exploring the latest in cloud technologies and artificial intelligence. Building the future, one line of code at a time.</p>
+              </div>
+              <div class="flex flex-row items-center space-x-4">
+                <a href="https://www.linkedin.com/in/niranjan-saravanan/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full bg-card border border-card-border hover:bg-primary hover:text-primary-foreground transition-all" aria-label="LinkedIn Profile">
+                  <i data-lucide="linkedin"></i>
+                </a>
+                <a href="https://github.com/niranjan-github" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full bg-card border border-card-border hover:bg-primary hover:text-primary-foreground transition-all" aria-label="GitHub Profile">
+                  <i data-lucide="github"></i>
+                </a>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                <button data-scroll="projects" class="bg-primary hover:bg-primary-hover text-primary-foreground px-8 py-3 rounded-lg font-medium transition-all shadow-card flex items-center justify-center">View Projects <i data-lucide="arrow-right" class="ml-2"></i></button>
+                <button data-scroll="contact" class="border border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3 rounded-lg font-medium transition-all">Contact Me</button>
+              </div>
+            </div>
+            <div class="flex justify-center lg:justify-end relative z-10 opacity-0" data-animate="fade-in" data-delay="300">
+              <div class="relative">
+                <div class="w-80 h-80 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 p-2">
+                  <img id="profile-img" src="https://res.cloudinary.com/dmbek4ywu/image/upload/f_auto,q_auto/v1755670682/IMG_1212_dqobv1.heic" alt="Niranjan - Professional Portrait" class="w-full h-full object-cover rounded-xl shadow-card transition-all hover:shadow-card-hover hover:scale-[1.02]" loading="lazy" />
+                </div>
+                <div class="absolute -top-4 -right-4 w-8 h-8 bg-primary rounded-full animate-pulse"></div>
+                <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-accent rounded-full animate-pulse" style="animation-delay:1s"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="py-20 px-6 section-tint-primary section-divider">
+        <div class="container mx-auto">
+          <div class="text-center mb-16 opacity-0" data-animate="slide-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Who I Am</h2>
+            <p class="text-lg text-muted-foreground max-w-2xl mx-auto">A passionate developer with a strong foundation in web technologies, cloud computing, and artificial intelligence</p>
+          </div>
+          <!-- My Journey - Centered -->
+          <div class="text-center mb-16 opacity-0" data-animate="slide-in-up" data-delay="200">
+            <div class="max-w-4xl mx-auto space-y-6">
+              <h3 class="text-2xl font-semibold">My Journey</h3>
+              <p class="text-muted-foreground leading-relaxed text-lg">I'm a dedicated software developer with a passion for creating innovative digital solutions. My expertise spans across modern web development, cloud technologies, and emerging AI applications.</p>
+              <p class="text-muted-foreground leading-relaxed text-lg">Currently focused on expanding my knowledge in AWS cloud services and generative AI, I believe in the power of technology to solve real-world problems and create meaningful user experiences.</p>
+            </div>
+          </div>
+          
+          <!-- Education and Core Strengths in a Row -->
+          <div class="grid lg:grid-cols-2 gap-12 mb-16">
+            <!-- Education Section -->
+            <div class="space-y-6 opacity-0" data-animate="slide-in-left" data-delay="300">
+              <h3 class="text-2xl font-semibold text-center lg:text-left">Education</h3>
+              <div class="space-y-3">
+                <!-- Current Education -->
+                <div class="education-item bg-card border border-card-border rounded-lg p-4 hover:shadow-card-hover transition-all hover:scale-[1.02] cursor-pointer group">
+                  <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                      <div class="flex items-center space-x-2 mb-2">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <h5 class="font-semibold text-primary">Currently Pursuing</h5>
+                      </div>
+                      <h6 class="font-medium">Electronics and Communication Engineering</h6>
+                      <p class="text-sm text-muted-foreground">Karpagam Institute of Technology, Coimbatore</p>
+                      <p class="text-xs text-muted-foreground mt-1">Focus: Software Development & Cloud Computing</p>
+                    </div>
+                    <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                      <i data-lucide="graduation-cap" class="text-primary w-5 h-5"></i>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 12th Standard -->
+                <div class="education-item bg-card border border-card-border rounded-lg p-4 hover:shadow-card-hover transition-all hover:scale-[1.02] cursor-pointer group">
+                  <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                      <div class="flex items-center space-x-2 mb-2">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <h5 class="font-semibold text-primary">Completed</h5>
+                      </div>
+                      <h6 class="font-medium">12th Standard</h6>
+                      <p class="text-sm text-muted-foreground">Kongu Vellalar Matric Higher Secondary School, Tirupur</p>
+                      <p class="text-xs text-muted-foreground mt-1">Stream: Computer Science</p>
+                    </div>
+                    <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                      <i data-lucide="book-open" class="text-primary w-5 h-5"></i>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 10th Standard -->
+                <div class="education-item bg-card border border-card-border rounded-lg p-4 hover:shadow-card-hover transition-all hover:scale-[1.02] cursor-pointer group">
+                  <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                      <div class="flex items-center space-x-2 mb-2">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <h5 class="font-semibold text-primary">Completed</h5>
+                      </div>
+                      <h6 class="font-medium">10th Standard</h6>
+                      <p class="text-sm text-muted-foreground">Kongu Vellalar Matric Higher Secondary School, Tirupur</p>
+                      <p class="text-xs text-muted-foreground mt-1">Board: Matriculation</p>
+                    </div>
+                    <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                      <i data-lucide="award" class="text-primary w-5 h-5"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Resume Download Button below Education -->
+              <div class="text-center pt-4">
+                <a href="./Niranjan_Resume.pdf" download="Niranjan-Resume.pdf" class="resume-download inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-3 rounded-lg font-medium transition-all shadow-card"><i data-lucide="download"></i><span>Download Resume</span></a>
+              </div>
+            </div>
+            
+            <!-- Core Strengths Section -->
+            <div class="space-y-6">
+              <h3 class="text-2xl font-semibold text-center lg:text-left">Core Strengths</h3>
+              <div class="space-y-4">
+                <div class="bg-card border border-card-border rounded-lg shadow-card hover:shadow-card-hover transition-all hover:scale-[1.02]">
+                  <div class="p-6 flex items-start space-x-4">
+                    <div class="p-2 bg-primary/10 rounded-lg"><i data-lucide="users" class="text-primary"></i></div>
+                    <div>
+                      <h4 class="font-semibold">Collaboration</h4>
+                      <p class="text-sm text-muted-foreground">Strong team player with excellent communication skills</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-card border border-card-border rounded-lg shadow-card hover:shadow-card-hover transition-all hover:scale-[1.02]">
+                  <div class="p-6 flex items-start space-x-4">
+                    <div class="p-2 bg-primary/10 rounded-lg"><i data-lucide="target" class="text-primary"></i></div>
+                    <div>
+                      <h4 class="font-semibold">Problem Solving</h4>
+                      <p class="text-sm text-muted-foreground">Analytical thinker with a passion for innovative solutions</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-card border border-card-border rounded-lg shadow-card hover:shadow-card-hover transition-all hover:scale-[1.02]">
+                  <div class="p-6 flex items-start space-x-4">
+                    <div class="p-2 bg-primary/10 rounded-lg"><i data-lucide="brain" class="text-primary"></i></div>
+                    <div>
+                      <h4 class="font-semibold">Continuous Learning</h4>
+                      <p class="text-sm text-muted-foreground">Always exploring new technologies and methodologies</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Skills -->
+      <section id="skills" class="py-20 px-6 section-tint-secondary section-divider">
+        <div class="container mx-auto">
+          <div class="text-center mb-8 opacity-0" data-animate="slide-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold">Technical Skills</h2>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Card 1 -->
+            <div class="skill-card bg-card border border-card-border rounded-lg shadow-card transition-all" data-percentage="78">
+              <div class="p-6 flex items-center justify-between">
+                <div class="flex-1 space-y-4">
+                  <div class="flex items-center space-x-3">
+                    <div class="skill-icon w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"><i data-lucide="code" class="text-primary"></i></div>
+                    <h4 class="font-semibold text-lg">Frontend Development</h4>
+                  </div>
+                  <ul class="space-y-1 text-sm text-muted-foreground">
+                    <li>HTML & CSS</li>
+                    <li>JavaScript</li>
+                  </ul>
+                </div>
+                <div class="flex-shrink-0 ml-6">
+                  <div class="circular-progress" data-percentage="78"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="skill-card bg-card border border-card-border rounded-lg shadow-card transition-all" data-percentage="65">
+              <div class="p-6 flex items-center justify-between">
+                <div class="flex-1 space-y-4">
+                  <div class="flex items-center space-x-3">
+                    <div class="skill-icon w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"><i data-lucide="database" class="text-primary"></i></div>
+                    <h4 class="font-semibold text-lg">Backend & Database</h4>
+                  </div>
+                  <ul class="space-y-1 text-sm text-muted-foreground">
+                    <li>Java</li>
+                    <li>Python</li>
+                    <li>SQL & DBMS</li>
+                  </ul>
+                </div>
+                <div class="flex-shrink-0 ml-6">
+                  <div class="circular-progress" data-percentage="65"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="skill-card bg-card border border-card-border rounded-lg shadow-card transition-all" data-percentage="55">
+              <div class="p-6 flex items-center justify-between">
+                <div class="flex-1 space-y-4">
+                  <div class="flex items-center space-x-3">
+                    <div class="skill-icon w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"><i data-lucide="cloud" class="text-primary"></i></div>
+                    <h4 class="font-semibold text-lg">AWS Cloud</h4>
+                  </div>
+                  <ul class="space-y-1 text-sm text-muted-foreground">
+                    <li>EC2 & S3</li>
+                    <li>Lambda Functions</li>
+                    <li>DynamoDB</li>
+                  </ul>
+                </div>
+                <div class="flex-shrink-0 ml-6">
+                  <div class="circular-progress" data-percentage="55"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="skill-card bg-card border border-card-border rounded-lg shadow-card transition-all" data-percentage="48">
+              <div class="p-6 flex items-center justify-between">
+                <div class="flex-1 space-y-4">
+                  <div class="flex items-center space-x-3">
+                    <div class="skill-icon w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"><i data-lucide="brain" class="text-primary"></i></div>
+                    <h4 class="font-semibold text-lg">Gen AI</h4>
+                  </div>
+                  <ul class="space-y-1 text-sm text-muted-foreground">
+                    <li>MCP</li>
+                    <li>AI Integration</li>
+                  </ul>
+                </div>
+                <div class="flex-shrink-0 ml-6">
+                  <div class="circular-progress" data-percentage="48"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="skill-card bg-card border border-card-border rounded-lg shadow-card transition-all" data-percentage="65">
+              <div class="p-6 flex items-center justify-between">
+                <div class="flex-1 space-y-4">
+                  <div class="flex items-center space-x-3">
+                    <div class="skill-icon w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"><i data-lucide="wrench" class="text-primary"></i></div>
+                    <h4 class="font-semibold text-lg">Tools & Technologies</h4>
+                  </div>
+                  <ul class="space-y-1 text-sm text-muted-foreground">
+                    <li>Git</li>
+                    <li>VS Code</li>
+                    <li>IntelliJ IDEA</li>
+                  </ul>
+                </div>
+                <div class="flex-shrink-0 ml-6">
+                  <div class="circular-progress" data-percentage="65"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="skill-card bg-card border border-card-border rounded-lg shadow-card transition-all" data-percentage="68">
+              <div class="p-6 flex items-center justify-between">
+                <div class="flex-1 space-y-4">
+                  <div class="flex items-center space-x-3">
+                    <div class="skill-icon w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center"><i data-lucide="lightbulb" class="text-primary"></i></div>
+                    <h4 class="font-semibold text-lg">Soft Skills</h4>
+                  </div>
+                  <ul class="space-y-1 text-sm text-muted-foreground">
+                    <li>Communication</li>
+                    <li>Leadership</li>
+                    <li>Time Management</li>
+                    <li>Problem Solving</li>
+                  </ul>
+                </div>
+                <div class="flex-shrink-0 ml-6">
+                  <div class="circular-progress" data-percentage="68"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certificates -->
+      <section id="certificates" class="py-20 px-6">
+        <div class="container mx-auto">
+          <div class="text-center mb-12 opacity-0" data-animate="slide-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Certificates & Credentials</h2>
+            <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Continuous learning and professional development in cutting-edge technologies</p>
+          </div>
+          <div class="flex flex-wrap justify-center gap-3 mb-12 opacity-0" data-animate="fade-in" data-delay="200">
+            <button class="filter-btn btn-outline" data-filter="all"><i data-lucide="filter" class="mr-2"></i>All Certificates</button>
+            <button class="filter-btn btn-outline" data-filter="aws"><i data-lucide="filter" class="mr-2"></i>AWS</button>
+            <button class="filter-btn btn-outline" data-filter="web"><i data-lucide="filter" class="mr-2"></i>Web Development</button>
+            <button class="filter-btn btn-outline" data-filter="database"><i data-lucide="filter" class="mr-2"></i>Database</button>
+            <button class="filter-btn btn-outline" data-filter="programming"><i data-lucide="filter" class="mr-2"></i>Programming</button>
+          </div>
+          <div id="cert-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0" data-animate="slide-in-up" data-delay="400">
+            <!-- Certificate cards injected by HTML below to keep DOM static -->
+            <div class="bg-card border border-card-border rounded-lg shadow-card group" data-category="aws">
+              <div class="p-6 border-b border-card-border">
+                <div class="flex items-start justify-between">
+                  <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                    <i data-lucide="award" class="text-primary"></i>
+                  </div>
+                  <button class="icon-btn opacity-0 group-hover:opacity-100" data-link="https://www.linkedin.com/posts/niranjan-saravanan_aws-cloudcomputing-serverless-activity-7345796114685534208-q461?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEbHc9YBKhIZDj0TPiFzEpQ_-EyA4iBplPE" aria-label="View certificate"><i data-lucide="external-link"></i></button>
+                </div>
+                <h3 class="text-lg font-semibold mt-3">AWS Cloud Practitioner Essentials</h3>
+                <div class="flex items-center text-sm text-muted-foreground space-x-2">
+                  <span>Amazon Web Services</span><span>•</span>
+                  <span class="inline-flex items-center space-x-1"><i data-lucide="calendar" class="w-3 h-3"></i><span>2025</span></span>
+                </div>
+              </div>
+              <div class="p-6">
+                <p class="text-sm text-muted-foreground">Foundational understanding of AWS Cloud concepts, services, and terminology.</p>
+                <button class="btn-outline w-full mt-4" data-link="https://www.linkedin.com/posts/niranjan-saravanan_aws-cloudcomputing-serverless-activity-7345796114685534208-q461?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEbHc9YBKhIZDj0TPiFzEpQ_-EyA4iBplPE">View Certificate <i data-lucide="external-link" class="ml-2 w-3 h-3"></i></button>
+              </div>
+            </div>
+           
+            <div class="bg-card border border-card-border rounded-lg shadow-card group" data-category="web">
+              <div class="p-6 border-b border-card-border">
+                <div class="flex items-start justify-between">
+                  <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors"><i data-lucide="award" class="text-primary"></i></div>
+                  <button class="icon-btn opacity-0 group-hover:opacity-100" data-link="https://certificates.ccbp.in/academy/build-your-own-responsive-website?id=PYEIAGLKNW" aria-label="View certificate"><i data-lucide="external-link"></i></button>
+                </div>
+                <h3 class="text-lg font-semibold mt-3">HTML & CSS</h3>
+                <div class="flex items-center text-sm text-muted-foreground space-x-2"><span>Nxtwave</span><span>•</span><span class="inline-flex items-center space-x-1"><i data-lucide="calendar" class="w-3 h-3"></i><span>2025</span></span></div>
+              </div>
+              <div class="p-6">
+                <p class="text-sm text-muted-foreground">Obtained proficiency in bootstrap, flexbox</p>
+                <button class="btn-outline w-full mt-4" data-link="https://certificates.ccbp.in/academy/build-your-own-responsive-website?id=PYEIAGLKNW">View Certificate <i data-lucide="external-link" class="ml-2 w-3 h-3"></i></button>
+              </div>
+            </div>
+            <div class="bg-card border border-card-border rounded-lg shadow-card group" data-category="web">
+              <div class="p-6 border-b border-card-border">
+                <div class="flex items-start justify-between">
+                  <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors"><i data-lucide="award" class="text-primary"></i></div>
+                  <button class="icon-btn opacity-0 group-hover:opacity-100" data-link="https://certificates.ccbp.in/academy/static-website?id=KOQALZYVIV" aria-label="View certificate"><i data-lucide="external-link"></i></button>
+                </div>
+                <h3 class="text-lg font-semibold mt-3">HTML & CSS Fundamentals</h3>
+                <div class="flex items-center text-sm text-muted-foreground space-x-2"><span>Nxtwave</span><span>•</span><span class="inline-flex items-center space-x-1"><i data-lucide="calendar" class="w-3 h-3"></i><span>2025</span></span></div>
+              </div>
+              <div class="p-6">
+                <p class="text-sm text-muted-foreground">Proficient in HTML, CSS, and Bootstrap for creating responsive, user-friendly, and mobile-first interfaces.</p><button class="btn-outline w-full mt-4" data-link="https://certificates.ccbp.in/academy/static-website?id=KOQALZYVIV">View Certificate <i data-lucide="external-link" class="ml-2 w-3 h-3"></i></button>
+              </div>
+            </div>
+            <div class="bg-card border border-card-border rounded-lg shadow-card group" data-category="database">
+              <div class="p-6 border-b border-card-border">
+                <div class="flex items-start justify-between">
+                  <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors"><i data-lucide="award" class="text-primary"></i></div>
+                  <button class="icon-btn opacity-0 group-hover:opacity-100" data-link="https://certificates.ccbp.in/academy/introduction-to-databases?id=QWCIFXVYII" aria-label="View certificate"><i data-lucide="external-link"></i></button>
+                </div>
+                <h3 class="text-lg font-semibold mt-3">SQL Database Design</h3>
+                <div class="flex items-center text-sm text-muted-foreground space-x-2"><span>Nxtwave
+                </span><span>•</span><span class="inline-flex items-center space-x-1"><i data-lucide="calendar" class="w-3 h-3"></i><span>2025</span></span></div>
+              </div>
+              <div class="p-6">
+                <p class="text-sm text-muted-foreground">Relational database design principles and SQL query optimization.</p>
+                <button class="btn-outline w-full mt-4" data-link="https://certificates.ccbp.in/academy/introduction-to-databases?id=QWCIFXVYII">View Certificate <i data-lucide="external-link" class="ml-2 w-3 h-3"></i></button>
+              </div>
+            </div>
+            <div class="bg-card border border-card-border rounded-lg shadow-card group" data-category="programming">
+              <div class="p-6 border-b border-card-border">
+                <div class="flex items-start justify-between">
+                  <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors"><i data-lucide="award" class="text-primary"></i></div>
+                  <button class="icon-btn opacity-0 group-hover:opacity-100" data-link="https://certificates.ccbp.in/academy/programming-foundations-with-python?id=QFAOWSQQPV" aria-label="View certificate"><i data-lucide="external-link"></i></button>
+                </div>
+                <h3 class="text-lg font-semibold mt-3">Python Programming</h3>
+                <div class="flex items-center text-sm text-muted-foreground space-x-2"><span>Nxtwave</span><span>•</span><span class="inline-flex items-center space-x-1"><i data-lucide="calendar" class="w-3 h-3"></i><span>2025</span></span></div>
+              </div>
+              <div class="p-6">
+                <p class="text-sm text-muted-foreground">Programming foundations with python</p>
+                <button class="btn-outline w-full mt-4" data-link="https://certificates.ccbp.in/academy/programming-foundations-with-python?id=QFAOWSQQPV">View Certificate <i data-lucide="external-link" class="ml-2 w-3 h-3"></i></button>
+              </div>
+            </div>
+            <div class="bg-card border border-card-border rounded-lg shadow-card group" data-category="programming">
+              <div class="p-6 border-b border-card-border">
+                <div class="flex items-start justify-between">
+                  <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors"><i data-lucide="award" class="text-primary"></i></div>
+                  <button class="icon-btn opacity-0 group-hover:opacity-100" data-link="https://moonshot.scaler.com/s/sl/b7ZPMBNbrt?_gl=1*l1pa8a*_gcl_au*OTYxMjc1NTUzLjE3NTE0MzExOTkuMTM5NTA4NDYyMi4xNzUzMjAyNTYzLjE3NTMyMDI1NjI.*FPAU*OTYxMjc1NTUzLjE3NTE0MzExOTk.*_ga*MTc3MTYzNjk2NC4xNzUxNDMxMTk4*_ga_53S71ZZG1X*czE3NTY4NjQzNjckbzU2JGcxJHQxNzU2ODY0NDE1JGoxMiRsMCRoOTU2NDg4OTk4" aria-label="View certificate"><i data-lucide="external-link"></i></button>
+                </div>
+                <h3 class="text-lg font-semibold mt-3">Object Oriented Programming with Java</h3>
+                <div class="flex items-center text-sm text-muted-foreground space-x-2"><span>Scaler</span><span>•</span><span class="inline-flex items-center space-x-1"><i data-lucide="calendar" class="w-3 h-3"></i><span>2025</span></span></div>
+              </div>
+              <div class="p-6">
+                <p class="text-sm text-muted-foreground">Data analysis and machine learning fundamentals using Python.</p>
+                <button class="btn-outline w-full mt-4" data-link="https://moonshot.scaler.com/s/sl/b7ZPMBNbrt?_gl=1*l1pa8a*_gcl_au*OTYxMjc1NTUzLjE3NTE0MzExOTkuMTM5NTA4NDYyMi4xNzUzMjAyNTYzLjE3NTMyMDI1NjI.*FPAU*OTYxMjc1NTUzLjE3NTE0MzExOTk.*_ga*MTc3MTYzNjk2NC4xNzUxNDMxMTk4*_ga_53S71ZZG1X*czE3NTY4NjQzNjckbzU2JGcxJHQxNzU2ODY0NDE1JGoxMiRsMCRoOTU2NDg4OTk4">View Certificate <i data-lucide="external-link" class="ml-2 w-3 h-3"></i></button>
+              </div>
+            </div>
+            <div class="bg-card border border-card-border rounded-lg shadow-card group" data-category="database">
+              <div class="p-6 border-b border-card-border">
+                <div class="flex items-start justify-between">
+                  <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors"><i data-lucide="award" class="text-primary"></i></div>
+                  <button class="icon-btn opacity-0 group-hover:opacity-100" data-link="https://www.hackerrank.com/certificates/iframe/545e2e8e8e1e" aria-label="View certificate"><i data-lucide="external-link"></i></button>
+                </div>
+                <h3 class="text-lg font-semibold mt-3">SQL (Intermediate)</h3>
+                <div class="flex items-center text-sm text-muted-foreground space-x-2"><span>Hackerrank</span><span>•</span><span class="inline-flex items-center space-x-1"><i data-lucide="calendar" class="w-3 h-3"></i><span>2025</span></span></div>
+              </div>
+              <div class="p-6">
+                <p class="text-sm text-muted-foreground">Obtained skills in SQL querying, database design, and data manipulation.</p>
+                <button class="btn-outline w-full mt-4" data-link="https://www.hackerrank.com/certificates/iframe/545e2e8e8e1e">View Certificate <i data-lucide="external-link" class="ml-2 w-3 h-3"></i></button>
+              </div>
+            </div>
+            <div class="bg-card border border-card-border rounded-lg shadow-card group" data-category="programming">
+              <div class="p-6 border-b border-card-border">
+                <div class="flex items-start justify-between">
+                  <div class="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors"><i data-lucide="award" class="text-primary"></i></div>
+                  <button class="icon-btn opacity-0 group-hover:opacity-100" data-link="https://www.hackerrank.com/certificates/iframe/545e2e8e8e1e" aria-label="View certificate"><i data-lucide="external-link"></i></button>
+                </div>
+                <h3 class="text-lg font-semibold mt-3">Problem Solving (Intermediate)</h3>
+                <div class="flex items-center text-sm text-muted-foreground space-x-2"><span>Hackerrank</span><span>•</span><span class="inline-flex items-center space-x-1"><i data-lucide="calendar" class="w-3 h-3"></i><span>2025</span></span></div>
+              </div>
+              <div class="p-6">
+                <p class="text-sm text-muted-foreground">Obtained skills in problem solving, algorithm design, and data structures.</p>
+                <button class="btn-outline w-full mt-4" data-link="https://www.hackerrank.com/certificates/iframe/545e2e8e8e1e">View Certificate <i data-lucide="external-link" class="ml-2 w-3 h-3"></i></button>
+              </div>
+            </div>
+          </div>
+          <div id="cert-empty" class="hidden text-center py-12">
+            <div class="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="award" class="text-muted-foreground"></i></div>
+            <p class="text-muted-foreground">No certificates found for this category.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="py-20 px-6 section-tint-accent">
+        <div class="container mx-auto">
+          <div class="text-center mb-12 opacity-0" data-animate="slide-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
+            <p class="text-lg text-muted-foreground max-w-2xl mx-auto">A showcase of my development work spanning web applications, cloud infrastructure, and AI solutions</p>
+          </div>
+          <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0" data-animate="slide-in-up" data-delay="200"></div>
+          <div id="projects-loading" class="hidden text-center py-12">
+            <div class="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p class="text-muted-foreground">Loading projects...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="py-20 px-6">
+        <div class="container mx-auto">
+          <div class="text-center mb-12 opacity-0" data-animate="slide-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+            <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Ready to discuss your next project or opportunity? I'd love to hear from you!</p>
+          </div>
+          <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <div class="space-y-8 opacity-0" data-animate="slide-in-left" data-delay="200">
+              <div>
+                <h3 class="text-2xl font-semibold mb-6">Let's Connect</h3>
+                <p class="text-muted-foreground leading-relaxed mb-8">Whether you have a project in mind, want to collaborate, or just want to say hello, I'm always excited to connect with fellow developers and potential clients.</p>
+              </div>
+              <div class="space-y-4">
+                <div class="bg-card border border-card-border rounded-lg shadow-card hover:shadow-card-hover transition-all hover:scale-[1.02]">
+                  <div class="p-6 flex items-center space-x-4"><div class="p-3 bg-primary/10 rounded-lg"><i data-lucide="phone" class="text-primary"></i></div><div><h4 class="font-semibold">Phone</h4><a href="tel:+919994849098" class="text-muted-foreground hover:text-primary">+91 9994849098</a></div></div>
+                </div>
+                <div class="bg-card border border-card-border rounded-lg shadow-card hover:shadow-card-hover transition-all hover:scale-[1.02]">
+                  <div class="p-6 flex items-center space-x-4"><div class="p-3 bg-primary/10 rounded-lg"><i data-lucide="mail" class="text-primary"></i></div><div><h4 class="font-semibold">Email</h4><a href="mailto:niranjanofficial001@gmail.com" class="text-muted-foreground hover:text-primary">niranjanofficial001@gmail.com</a></div></div>
+                </div>
+                <div class="bg-card border border-card-border rounded-lg shadow-card hover:shadow-card-hover transition-all hover:scale-[1.02]">
+                  <div class="p-6 flex items-center space-x-4"><div class="p-3 bg-primary/10 rounded-lg"><i data-lucide="map-pin" class="text-primary"></i></div><div><h4 class="font-semibold">Location</h4><span class="text-muted-foreground">Tirupur, Tamil Nadu, India</span></div></div>
+                </div>
+              </div>
+              <div class="bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 rounded-lg">
+                <div class="p-6 flex items-start space-x-3"><i data-lucide="check-circle" class="text-success mt-1"></i><div><h4 class="font-semibold mb-1">Available for Projects</h4><p class="text-sm text-muted-foreground">Currently accepting new freelance and full-time opportunities</p></div></div>
+              </div>
+            </div>
+            <div class="opacity-0" data-animate="slide-in-up" data-delay="400">
+              <div class="bg-card border border-card-border rounded-lg shadow-card">
+                <div class="p-6 border-b border-card-border"><h3 class="text-xl font-semibold">Send me a message</h3></div>
+                <div class="p-6">
+                  <form action="https://formspree.io/f/meolveoe" method="POST" id="contact-form" class="space-y-6">
+                    <div>
+                      <label for="name" class="block text-sm font-medium mb-2">Full Name *</label>
+                      <input id="name" name="name" type="text" placeholder="Your full name" class="w-full rounded-md border border-input px-3 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition" required />
+                    </div>
+                    <div>
+                      <label for="email" class="block text-sm font-medium mb-2">Email Address *</label>
+                      <input id="email" name="email" type="email" placeholder="your.email@example.com" class="w-full rounded-md border border-input px-3 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition" required />
+                    </div>
+                    <div>
+                      <label for="message" class="block text-sm font-medium mb-2">Message *</label>
+                      <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or just say hello..." class="w-full rounded-md border border-input px-3 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition resize-none" required></textarea>
+                    </div>
+                    <button id="submit-btn" type="submit" class="w-full bg-primary hover:bg-primary-hover text-primary-foreground py-3 rounded-lg font-medium transition flex items-center justify-center gap-2">
+                      <span class="loader hidden w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full"></span>
+                      <i data-lucide="send"></i>
+                      <span>Send Message</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card border-t border-card-border">
+      <div class="container mx-auto px-6 py-12">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div class="space-y-4">
+            <h3 class="text-2xl font-bold text-primary">Niranjan</h3>
+            <p class="text-muted-foreground text-sm leading-relaxed">Web Developer, AWS Cloud Learner, and Gen AI Software Developer. Passionate about creating innovative digital solutions.</p>
+            <div class="flex items-center space-x-4">
+              <a href="https://www.linkedin.com/in/niranjan-saravanan/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all hover:scale-110" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+              <a href="https://github.com/niranjan-github" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all hover:scale-110" aria-label="GitHub"><i data-lucide="github" class="w-4 h-4"></i></a>
+              <a href="mailto:niranjan.dev@example.com" class="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all hover:scale-110" aria-label="Email"><i data-lucide="mail" class="w-4 h-4"></i></a>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <h4 class="text-lg font-semibold">Quick Links</h4>
+            <nav class="space-y-2">
+              <button class="block text-muted-foreground hover:text-primary text-sm nav-link" data-target="home">Home</button>
+              <button class="block text-muted-foreground hover:text-primary text-sm nav-link" data-target="about">About</button>
+              <button class="block text-muted-foreground hover:text-primary text-sm nav-link" data-target="certificates">Certificates</button>
+              <button class="block text-muted-foreground hover:text-primary text-sm nav-link" data-target="projects">Projects</button>
+              <button class="block text-muted-foreground hover:text-primary text-sm nav-link" data-target="contact">Contact</button>
+            </nav>
+          </div>
+          <div class="space-y-4">
+            <h4 class="text-lg font-semibold">Get In Touch</h4>
+            <div class="space-y-2 text-sm text-muted-foreground">
+              <p>Tiruppur, Tamil Nadu, India</p>
+              <p>niranjanofficial001@gmail.com</p>
+              <p>+91 9994849098</p>
+            </div>
+            <p class="text-xs text-muted-foreground">Available for freelance and full-time opportunities</p>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-card-border">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-muted-foreground">© <span id="year"></span> Niranjan. All rights reserved.</p>
+            <div class="flex items-center space-x-1 text-sm text-muted-foreground"><span>Made with</span><i data-lucide="heart" class="text-red-500 fill-current w-4 h-4"></i><span>and lots of ☕</span></div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./scripts.js"></script>
+  </body>
+  </html>
+
